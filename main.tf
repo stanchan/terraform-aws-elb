@@ -10,12 +10,12 @@ resource "aws_security_group" "aws-lb" {
   )
 }
 
-resource "aws_security_group_rule" "aws-allow-proxy-access" {
+resource "aws_security_group_rule" "aws-allow-proxy-ingress" {
   type              = "ingress"
   from_port         = var.aws_lb_proxy_port
   to_port           = var.fusion_secure_proxy_port
   protocol          = "TCP"
-  cidr_blocks       = ["0.0.0.0/0"]
+  cidr_blocks       = var.aws_vpc_cidr_block
   security_group_id = aws_security_group.aws-lb.id
 }
 
@@ -33,7 +33,7 @@ resource "aws_lb" "aws-lb-proxy" {
   name               = "fusion-lb-${var.aws_cluster_name}"
   internal           = true
   load_balancer_type = "application"
-  subnets            = var.aws_subnet_ids_public
+  subnets            = var.aws_subnet_ids
   security_groups    = [aws_security_group.aws-lb.id]
 
   enable_deletion_protection = false

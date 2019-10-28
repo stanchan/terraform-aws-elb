@@ -2,8 +2,13 @@ variable "aws_cluster_name" {
   description = "Name of Cluster"
 }
 
-variable "aws_vpc_id" {
-  description = "AWS VPC ID"
+variable "aws_vpc_cidr_block" {
+  description = "CIDR Block for VPC"
+}
+
+variable "aws_subnet_ids" {
+  description = "IDs of Public Subnets"
+  type        = list(string)
 }
 
 variable "aws_lb_proxy_port" {
@@ -16,11 +21,6 @@ variable "fusion_secure_proxy_port" {
 
 variable "aws_avail_zones" {
   description = "Availability Zones Used"
-  type        = list(string)
-}
-
-variable "aws_subnet_ids_public" {
-  description = "IDs of Public Subnets"
   type        = list(string)
 }
 
