@@ -1,3 +1,7 @@
+variable "aws_vpc_id" {
+  description = "VPC ID"
+}
+
 variable "aws_cluster_name" {
   description = "Name of Cluster"
 }
